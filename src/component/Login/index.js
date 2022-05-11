@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
-import Logo from "../static/img.svg";
-import Wall from "../static/MetaWall.svg";
+import Logo from "../../static/img.svg";
+import Wall from "../../static/MetaWall.svg";
+import "./Login.css"
 export default class Login extends Component {
     state ={
         loginState : true

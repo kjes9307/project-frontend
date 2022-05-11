@@ -1,0 +1,90 @@
+
+.container {
+	/* min-height: 100vh; */
+	margin: 0 auto;
+	width: 1440px;
+	height: 960px;
+	padding: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #EFECE7
+}
+.login-container {
+	height: 535px;
+	width: 869px;
+	margin: 0 auto;
+	box-shadow: -8px 8px 0px #00040029;
+	border: 2px solid #000400;
+	opacity: 1;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	font-size: 16px;
+}
+.login-container h3 {
+	font-size: 16px;
+	margin-top: 10px;
+}
+.login-Logo{
+	width: 350px;
+	height: 341px;
+	background: transparent 0% 0% no-repeat padding-box;
+	opacity: 1;
+}
+.login-item{
+	width: 374px;
+}
+.login-bar{
+	position: relative;
+	left: 40px;
+	top: -10px;
+	margin-bottom: 20px;
+	
+}
+.login-bar img{
+	width: 296px;
+	height: 84px;
+	background: transparent 0% 0% no-repeat padding-box;
+	opacity: 1;
+	margin-left: 25px;
+}
+.login-bar h3{
+	font-family: Helvetica Neue;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 0px;
+	color: #000400;
+	opacity: 1;
+	margin-left: 30px;
+ 	margin-top: 10px; 
+}
+.register{
+	font-family: Helvetica Neue;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: 0px;
+	color: #000400;
+	opacity: 1;
+	text-align: center;
+	margin-top: 10px;
+}
+.login-form {
+	width: 373px;
+	text-align: center;
+	margin: 0 auto;
+}
+.login-form-button {
+	width: 373px;
+	height: 54px;
+	box-shadow: -1px 1px 0px #000400;
+	border: 2px solid #000400;
+	border-radius: 8px;	
+	font-size: 16px;
+}
+.login-form-input{
+	width: 373px;
+	border: 2px solid #000400;
+	opacity: 1;
+}
+
