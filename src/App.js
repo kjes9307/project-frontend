@@ -1,6 +1,6 @@
 
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+// import {BrowserRouter} from 'react-router-dom';
 import 'antd/dist/antd.min.css'
 import './App.css';
 import Login from './component/Login'
@@ -9,9 +9,8 @@ class App extends React.Component {
   render(){
     
     return (
-      <BrowserRouter>
+      
         <PostWall />
-      </BrowserRouter>
     )
   }
 }

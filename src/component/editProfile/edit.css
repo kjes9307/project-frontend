@@ -1,0 +1,38 @@
+.edit-bar{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 16px;
+}
+.edit-bar-item{
+    width: 112px;
+    height: 40px;
+    font-size: 16px;
+    font-family: "Noto Sans TC";
+    letter-spacing: 0px;
+    box-sizing: content-box;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 8px 0px 0px;
+    background: #fff;
+}
+.edit-bar-offset{
+    background: #000400;
+    color: #fff;
+    font-size: 16px;
+    font-family: "Noto Sans TC";
+}
+.edit-layout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.edit-body{
+    margin-top: 15px;
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+}
+

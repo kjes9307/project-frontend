@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
 import moment from 'moment';
 import "./post.css"
-import {Select,Input } from "antd";
 import testImg from "../../static/image.png"
 import {LikeOutlined,UserOutlined,SearchOutlined} from '@ant-design/icons';
 import DefaultPost from '../Default';
 
-// <LikeOutlined /><UserOutlined />
-
-const { Option } = Select;
-const { Search } = Input;
 export default class Post extends Component {
     state ={
         timeNow : "",
@@ -23,11 +18,12 @@ export default class Post extends Component {
                 "comment" : [
                     {
                         "name" : "路人甲",
-                        "comment" : "哈哈哈哈哈阿"
+                        "comment" : "哈哈哈哈哈阿",
+                        "img":""
                     },
                     {
                         "name" : "路人乙",
-                        "comment" : "哈哈哈哈哈阿"
+                        "comment" : "++++"
                     }
                 ]
             },
@@ -56,7 +52,7 @@ export default class Post extends Component {
   render() {
     const  {timeNow,User} = this.state
 
-    return (
+    return ( 
         <div className='postContain'>
         <div className='postSearch'>
             <select defaultValue="最新的貼文" 
