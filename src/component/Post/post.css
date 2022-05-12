@@ -1,0 +1,124 @@
+
+.main{
+    width: 533px;
+    border: 2px solid #000400;
+    box-shadow: 0px 2px 0px #000400;
+    border-radius: 8px;
+    opacity: 1;
+    background: #fff;
+    margin-bottom: 16px;
+}
+.main h3{
+    display: inline-block;
+}
+.postSearch{
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.postAvatar{
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background-image: url('../../static/user@2x.png');
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover ;
+    opacity: 1;
+    margin-top: 24px;
+    margin-left: 24px;
+    margin-bottom: 16px;
+    position: relative;
+}
+.postAvatar h3{
+    position: absolute;
+    left: 60px;
+    top: 1px;
+    letter-spacing: 0px;
+    color: #000400;
+    opacity: 1;
+    font-family: "Noto Sans TC";
+    font-size: 16px;
+}
+.postAvatar span{
+    display: block;
+    font-size: 12px;
+    font-family: "Baloo Da 2";
+    letter-spacing: 0px;
+    color: #9B9893;
+    opacity: 1;
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    white-space: nowrap;
+}
+.postBody{
+    width: 485px;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+    text-align: left;
+    font-size: 16px;
+}
+.postImg{
+    width: 485px;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 20px;
+}
+.ant-input-search-button{
+    background: #03438D;
+    border: 1px solid #000400;
+}
+.ant-input-affix-wrapper {
+    border: 1px solid #000400;
+}
+.user-action {
+    display: flex;
+    align-items: center;
+    /* vertical-align 也可以做到? 圖片跟文字對其中線? */
+}
+.user-comment{
+    display: flex;
+    align-items: center;
+    /* border: 1px solid black; */
+    margin-top: 19px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    height: 30px;
+    width: 485px;
+}
+.user-post{
+    margin: 16px auto;
+    width: 485px;
+    background: #EFECE7;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    opacity: 0.9;
+}
+
+.user-img{
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 50% 50% 50% 50%;
+    margin-top: 18px;
+    margin-left: 16px;
+    margin-right: 16px;
+    position: relative;
+    
+}
+.commentInfo{
+    position: relative;
+    left: 52px;
+    top: 2px;
+}
+.commentText{
+    margin-left: 68px;
+    margin-top: 4px;
+    margin-right: 10px;
+}

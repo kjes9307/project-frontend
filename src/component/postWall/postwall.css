@@ -58,72 +58,8 @@ html , body{
     margin: 0 auto;
     margin-top: 49px;
 }
-.main{
-    width: 533px;
-    border: 2px solid #000400;
-    box-shadow: 0px 2px 0px #000400;
-    border-radius: 8px;
-    opacity: 1;
-}
-.main h3{
-    display: inline-block;
-}
-.postSearch{
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.postAvatar{
-    display: inline-block;
-    width: 45px;
-    height: 45px;
-    background-image: url('../../static/user@2x.png');
-    background-repeat: no-repeat; 
-    background-position: center;
-    background-size: cover ;
-    opacity: 1;
-    margin-top: 24px;
-    margin-left: 24px;
-    margin-bottom: 16px;
-    position: relative;
-}
-.postAvatar h3{
-    position: absolute;
-    left: 60px;
-    top: 1px;
-    letter-spacing: 0px;
-    color: #000400;
-    opacity: 1;
-    font-family: "Noto Sans TC";
-    font-size: 16px;
-}
-.postAvatar span{
-    display: block;
-    font-size: 12px;
-    font-family: "Baloo Da 2";
-    letter-spacing: 0px;
-    color: #9B9893;
-    opacity: 1;
-    position: absolute;
-    top: 20px;
-    left: 60px;
-    white-space: nowrap;
-}
-.postBody{
-    width: 485px;
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-bottom: 24px;
-    text-align: left;
-    font-size: 16px;
-}
-.postImg{
-    width: 485px;
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-bottom: 24px;
-}
+
+
 .sidebar{
     width: 309px;
     height: 336px;
@@ -174,10 +110,3 @@ html , body{
     text-align: center;
 }
 
-.ant-input-search-button{
-    background: #03438D;
-    border: 1px solid #000400;
-}
-.ant-input-affix-wrapper {
-    border: 1px solid #000400;
-}
