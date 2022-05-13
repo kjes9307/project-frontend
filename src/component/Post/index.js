@@ -11,7 +11,7 @@ export default class Post extends Component {
         likes:1 ,
         User: [
             {
-                "name" :"test",
+                "name" :"邊緣人物",
                 "likes" : 3,
                 "post" : "天氣有點冷...!好想吃火鍋",
                 "img" : testImg,
@@ -28,7 +28,7 @@ export default class Post extends Component {
                 ]
             },
             {
-                "name" :"test2",
+                "name" :"邊緣人物",
                 "likes" : 3,
                 "post" : "今天天氣超好",
                 "img" : testImg,
@@ -73,7 +73,7 @@ export default class Post extends Component {
         { User.length !==0 ?User.map((x)=> (
         <div className="main" key={x.name}>
             <div className="postAvatar">
-              <h3>{x.name}</h3>
+              <h3 style={{ whiteSpace:"nowrap"}}>{x.name}</h3>
               <span>{timeNow}</span>
             </div>
             <div className="postBody">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import "./edit.css"
 import user_default from "../../static/user_default.png"
+import EditPassword from '../editPassword';
 export default class EditProfile extends Component {
   state ={
         tab1 :  true,
@@ -30,9 +31,10 @@ export default class EditProfile extends Component {
                 <div className="module-post">
                     <div className='edit-layout'>
                         <img src={user_default} alt="" />
-                        <button>上傳大頭貼照</button>
+                        <button style={{background: "#000400",width:128,height:32,color:"#fff",marginTop:10}}>上傳大頭貼照</button>
                     </div>
                     <div className='edit-body'>
+                        {tab1 === true ?
                         <div>
                             <div style={{marginBottom:"4px"}}>
                                 <label>暱稱</label>
@@ -48,6 +50,7 @@ export default class EditProfile extends Component {
                                 <label style={{marginLeft :"16px",width:"20px",height:"20px"}}>女</label>                         
                             </div>
                         </div> 
+                        : <EditPassword/> }
                         <button style={{cursor:"pointer",boxShadow:"-2px 2px 0px #000400",background: "#EEC32A",width:"323px",height:"51px",marginBottom:"16px",marginTop:"16px"}}>送出更新</button>
                     </div>
                     
