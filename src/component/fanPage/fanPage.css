@@ -1,0 +1,55 @@
+.module-fan-bar{
+    margin-bottom: 10px;
+    width: 533px;
+    height: 77px;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    font-size: 20px;
+    font-family: "Azeret Mono";
+    font-weight: bold;
+    border: 2px solid #000400;
+    opacity: 1;
+    background: #fff;
+    border-radius: 8px 0px 0px 8px;
+    position: relative;
+    /* box-sizing: content-box; */
+}
+.module-fan-bar-Icon{
+    position: relative;
+    left: -1px;
+    top: -1.9px;
+    display: inline-block;
+    border: 1px solid #000400;
+    height: 77.5px;
+    width: 80px;
+    border-radius: 8px 0px 0px 8px;
+    background: url("../../static/user_default.png");
+    background-position: center;
+    /* background-size: cover; */
+}
+.module-fan-bar-Text{
+    position: absolute;
+    left: 96px;
+    top: 20px;
+    font-size: 16px;
+    font-family: "Noto Sans TC";
+    letter-spacing: 0px;
+    color: #000400;
+    white-space: nowrap;
+}
+.module-fan-bar button{
+    position: absolute;
+    right: 16px;
+    top: 20px;
+    background: #EEC32A;
+    box-shadow: 0px 2px 0px #000400;
+    border: 2px solid #000400;
+    border-radius: 8px;
+    opacity: 1;
+    width: 96px;
+    height: 36px;   
+    font: normal normal bold 16px "Noto Sans TC";
+    letter-spacing: 0px;
+    color: #000400;
+}

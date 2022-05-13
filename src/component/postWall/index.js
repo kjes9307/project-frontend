@@ -9,6 +9,7 @@ import Track from '../Track';
 import EditProfile from '../editProfile';
 import AddPost from '../addPost';
 import LikeList from '../likeList'
+import FanPage from '../fanPage';
 // import Login from "../Login"
 export default class PostWall extends Component {
   
@@ -37,7 +38,7 @@ export default class PostWall extends Component {
         },
         {
           label: (
-            <MyNavLink to="/login" disabled>
+            <MyNavLink to="/login" >
               登出
             </MyNavLink>
           ),
@@ -66,7 +67,7 @@ export default class PostWall extends Component {
             <Route path="/Track" component={Track} />
             <Route path="/edit" component={EditProfile} />
             <Route path="/likeList" component={LikeList} />
-            {/* <Route path="/login" component={Login} /> */}
+            <Route path="/login" component={FanPage} />
             <Redirect to="/post" />
           </Switch>
           
