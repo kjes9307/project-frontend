@@ -9,8 +9,8 @@ class App extends React.Component {
   render(){
     
     return (
-      
-        <PostWall />
+        <Login />
+        // <PostWall />
     )
   }
 }

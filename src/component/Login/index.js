@@ -4,6 +4,7 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import Logo from "../../static/img.svg";
 import Wall from "../../static/MetaWall.svg";
 import "./Login.css"
+import Demo from "../formControl/form.js"
 export default class Login extends Component {
     state ={
         loginState : true
@@ -28,6 +29,7 @@ export default class Login extends Component {
                 <h3>到元宇宙展開全新社交圈</h3>
               </div>
               <div className="login-form">
+                {/* <LoginForm /> */}
               <Form
                   name="normal_login"
                   className="login-form"
@@ -60,7 +62,7 @@ export default class Login extends Component {
                         },
                       ]}
                     >
-                      <Input
+                      <Input.Password
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         className="login-form-input"
@@ -115,7 +117,7 @@ export default class Login extends Component {
                           },
                         ]}
                       >
-                      <Input
+                      <Input.Password
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         className="login-form-input"
