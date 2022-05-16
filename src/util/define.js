@@ -6,4 +6,4 @@ let requestType = {
     post : "POST"
 };
 
-module.exports = {requestType};
+export default requestType;

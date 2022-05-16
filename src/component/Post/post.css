@@ -21,7 +21,8 @@
     display: inline-block;
     width: 45px;
     height: 45px;
-    background-image: url('../../static/user@2x.png');
+    /* background-image: url('../../static/user@2x.png'); */
+    border-radius: 50% 50% 50% 50%;
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover ;
@@ -66,6 +67,13 @@
     margin-left: 24px;
     margin-right: 24px;
     margin-bottom: 20px;
+}
+.postImg img{
+    height: 150px;
+    width: 100%;
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover ;
 }
 .ant-input-search-button{
     background: #03438D;

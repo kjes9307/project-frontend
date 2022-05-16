@@ -1,22 +1,29 @@
-const axios = require("axios").default;
-const apiService = (router,body={},method="GET") => {
+import {message} from 'antd';
+import axios from "axios";
+import requestType from "../util/define";
+const apiService = async (router,body={},method="GET") => {
+    try{
         let response ;
         let urlPrefix = "https://morning-ocean-14546.herokuapp.com"
         let url = urlPrefix+router;
         console.log("request url",url,body)
-        if(method==="GET"){
-            response=axios.get(url,{params:body});
-        }else if(method==="POST"){
-            response=axios.post(url,body);
-        }else if(method==="DELETE"){
-            response=axios.delete(url,body);
-        }else if(method==='PATCH'){
-            response=axios.patch(url,body);
+    
+        if(method===requestType.get){
+            response =await axios.get(url,{params:body});
+        }else if(method===requestType.post){
+            response =await axios.post(url,body);
+        }else if(method===requestType.delete){
+            response =await axios.delete(url,body);
+        }else if(method===requestType.patch){
+            response =await axios.patch(url,body);
         }
         return response;
+    }catch(error){
+        const {status,msg} = error.response.data
+        message.error(`Error(${status}): ${msg}`,10);
+    }
 
 }
-
-module.exports = apiService;
+export default apiService;
 
 

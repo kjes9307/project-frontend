@@ -1,45 +1,21 @@
 import React, { Component } from 'react'
-import moment from 'moment';
 import "./post.css"
-import testImg from "../../static/image.png"
 import {LikeOutlined,UserOutlined,SearchOutlined} from '@ant-design/icons';
 import DefaultPost from '../Default';
+import {getPost} from "../../API"
 
 export default class Post extends Component {
     state ={
         timeNow : "",
         likes:1 ,
-        User: [
-            {
-                "name" :"邊緣人物",
-                "likes" : 3,
-                "post" : "天氣有點冷...!好想吃火鍋",
-                "img" : testImg,
-                "comment" : [
-                    {
-                        "name" : "路人甲",
-                        "comment" : "哈哈哈哈哈阿",
-                        "img":""
-                    },
-                    {
-                        "name" : "路人乙",
-                        "comment" : "++++"
-                    }
-                ]
-            },
-            {
-                "name" :"邊緣人物",
-                "likes" : 3,
-                "post" : "今天天氣超好",
-                "img" : testImg,
-                "comment" : [
-                ]
-            }
-        ]
+        UserPost: []
       }
-    componentDidMount(){
-        let timeNow = moment(new Date()).format('YYYY/MM/DD HH:mm')
-        this.setState({timeNow});
+    componentDidMount = async () =>{
+        let res = await getPost({});
+        if(res.data.status === 200){
+            let UserPost = res.data.data;
+            this.setState({UserPost},()=>console.log(UserPost));
+        }
     }
     addLikes = () => {
         const {likes} = this.state;
@@ -50,7 +26,7 @@ export default class Post extends Component {
         console.log("onSearch",e);
     }
   render() {
-    const  {timeNow,User} = this.state
+    const  {UserPost} = this.state
 
     return ( 
         <div className='postContain'>
@@ -70,19 +46,24 @@ export default class Post extends Component {
                 <SearchOutlined style={{fontSize: "20px", opacity: "1",position:"absolute",left:"12px",top:"13px",color:"#fff"}} />
             </div>
         </div>
-        { User.length !==0 ?User.map((x)=> (
+        { UserPost.length !==0 ?UserPost.map((x)=> (
         <div className="main" key={x.name}>
-            <div className="postAvatar">
+            <div className="postAvatar" style={{backgroundImage: `url(${x.user.photo})`}}>
               <h3 style={{ whiteSpace:"nowrap"}}>{x.name}</h3>
-              <span>{timeNow}</span>
+              <span>{x.createAt}</span>
             </div>
             <div className="postBody">
               <span>
-              {x.post}
+              {x.content}
               </span>
             </div>
-            <div className="postImg">
-              <img src={x.img} alt="" />
+            <div className="postImg" >
+            { x.image !== ""?
+              <img 
+                // style={{backgroundImage: `url(${x.image})`}}
+                src='https://hexschool.github.io/flexImgUrl/3/logo.png' alt = 'stupid react shit'
+                />
+            : null}
             </div>
             <div className="user-action">
                 <LikeOutlined onClick={this.addLikes} style={{marginLeft:'24px',fontSize: '20px'}} />&nbsp;<span style={{fontSize: '16px'}}>{x.likes}</span>
@@ -94,7 +75,7 @@ export default class Post extends Component {
                 <input placeholder='請輸入留言' style={{padding:"8px 16px",width:'308.5px',marginLeft:'8.5px',height:"40px",border: "2px solid #000400"}} />
                 <button children='留言' style={{cursor:"pointer",width:'128px',height:"40px",border: "2px solid #000400",background: "#03438D" ,color:"#fff"}}  />
             </div>
-            { x.comment.length !==0? x.comment.map(post=>(
+            {/* { x.comment.length !==0? x.comment.map(post=>(
                 <div className="user-post" key={post.name}>
                     <div className="user-img">
                         <UserOutlined style={{fontSize: '28px',position:"absolute",left:"5px",top:"3px"}}/>
@@ -109,7 +90,7 @@ export default class Post extends Component {
                         </span> 
                     </div> 
                 </div>
-            )): null}
+            )): null} */}
         </div>
         )):<DefaultPost />}
     </div>  

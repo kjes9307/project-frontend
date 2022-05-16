@@ -2,11 +2,23 @@ import React, { Component } from 'react'
 import { Input } from 'antd';
 import PostImg from "../../static/image.png"
 import "./addContain.css"
+import {addPost} from "../../API"
 const { TextArea } = Input;
 export default class AddPost extends Component {
   onTextChange = e => {
     console.log('Change:', e.target.value);
   };
+  addNewPost = async() =>{
+    let data = {
+      name: 123,
+      content: "123",
+      tags : "心情",
+      type : "",
+      user : "6281e21843b0a3a5f7187d55"
+  }
+    let resposne = await addPost(data);
+    console.log("really data =",resposne)
+  }
   render() {
     return (
       <div>
@@ -15,6 +27,10 @@ export default class AddPost extends Component {
             </div>
             <div className="main">
               <div className="addContain-layout">
+              <img
+                  src={require('../../static/image.png')}
+                  style={{width:50,height:50}}
+                />
               <div>
                 <h4 style={{ 
                             marginTop:16,
@@ -36,7 +52,7 @@ export default class AddPost extends Component {
               
               <img src={PostImg} style={{ height: 169 , width: 469 }} alt=""></img>
               </div>
-              <button 
+              <button onClick={this.addNewPost}
                 style={{cursor:"pointer",
                         boxShadow:"-2px 2px 0px #000400",
                         background: "#EEC32A",

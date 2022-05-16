@@ -1,10 +1,14 @@
-const apiService = require("./api")
-const {requestType} = require("../util/define");
-console.log(requestType);
-const getPost = data => apiService('/posts', data, reqType.get);
+import apiService from "./api"
+import requestType from "../util/define";
 
-const addPost = data => apiService('/posts', data, reqType.post);
+const getPost = data => apiService('/posts', data, requestType.get);
 
+const addPost = data => apiService('/posts', data, requestType.post);
+
+export {
+    getPost,
+    addPost
+}
 // getPost({key:"3"})
 // .then(function (response) {console.log(response.data)})
 // .catch(function (error) {console.log(error)})
