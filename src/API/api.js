@@ -20,7 +20,8 @@ const apiService = async (router,body={},method="GET") => {
         return response.data;
     }catch(error){
         const {status,msg} = error.response.data
-        message.error(`Error(${status}): ${msg}`,10);
+        message.error(`Error(${status}): ${msg}`,5);
+        return error.response.data;
     }
 
 }

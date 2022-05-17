@@ -49,7 +49,7 @@ export default class Post extends Component {
         </div>
         { UserPost.length !==0 ?UserPost.map((x)=> (
         <div className="main" key={x.name}>
-            <div className="postAvatar" style={{backgroundImage: `url(${x.user.photo})`}}>
+            <div className="postAvatar" style={{backgroundImage: `url(${ x.user ? x.user.photo : null})` }}>
               <h3 style={{ whiteSpace:"nowrap"}}>{x.name}</h3>
               <span>{x.createAt}</span>
             </div>
