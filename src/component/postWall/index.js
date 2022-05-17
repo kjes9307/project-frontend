@@ -12,8 +12,6 @@ import LikeList from '../likeList';
 import FanPage from '../fanPage';
 
 export default class PostWall extends Component {
-  
-  
   handleChange= (value) => {
     console.log(`selected ${value}`);
   }
@@ -38,7 +36,7 @@ export default class PostWall extends Component {
         },
         {
           label: (
-            <MyNavLink to="/" >
+            <MyNavLink to="/login" >
               登出
             </MyNavLink>
           ),
@@ -47,7 +45,6 @@ export default class PostWall extends Component {
     />
   );
   render() {
-    
     return (
       <div className="wrap">
         <div className="header">

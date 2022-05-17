@@ -1,7 +1,11 @@
 import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import {userRegistry,userLogin} from '../../API'
+import userStatuRecorder from "../../util/memoryParams";
+import memoryService from "../../util/memoryUtil";
+
 const LoginForm = (params) => {
+  console.log("@",userStatuRecorder);
   const [form] = Form.useForm();
   const {action} = params
   const onSubmit = async (values) => {
@@ -19,6 +23,8 @@ const LoginForm = (params) => {
       else{ 
         resposne = await userLogin(values);
         if(resposne.status === 200){  
+          userStatuRecorder[0]= resposne.data.token;
+          memoryService.saveUser(resposne.data.token);
           message.success("Login Success",2)
           form.resetFields();
           params.history.replace('/post')

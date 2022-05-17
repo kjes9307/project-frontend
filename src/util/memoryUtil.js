@@ -1,11 +1,13 @@
+import store from 'store';
 const Token = 'userToken';
 const memoryService = {
-    saveUser : (user)=>{
-        localStorage.setItem(Token,JSON.stringify(user));
-    },
+    saveUser : user=> store.set(Token,user)
+    ,
     getUser : 
-        () => JSON.parse(localStorage.getItem(Token) || '{}')
+        () => store.get(Token) || {}
     ,
     removeUser :
-        () =>  localStorage.removeItem(Token)
+        () => store.remove(Token)
 }
+
+export default memoryService;

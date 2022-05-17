@@ -1,24 +1,21 @@
 import React from 'react';
-// import ReactDOM from 'react-dom/client'; // 會影響router 運作
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
 import './index.css';
 import App from './App';
-// import reportWebVitals from './reportWebVitals';
+import userStatuRecorder from "./util/memoryParams";
+import memoryService from "./util/memoryUtil";
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>
-// );
+const user = memoryService.getUser();
+userStatuRecorder.length = 0
+if(Object.keys(user).length !== 0) userStatuRecorder[0] = user;
+
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>
     <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals();

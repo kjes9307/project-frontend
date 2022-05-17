@@ -7,9 +7,6 @@ export default class Login extends Component {
   state ={
       loginState : true
     }
-  onFinish = (values) => {
-    console.log('Received values of form: ', values);
-  };
   modeSwitch=()=>{
     const {loginState} = this.state
     let status = !loginState
