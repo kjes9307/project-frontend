@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment';
 import {UserOutlined,UserDeleteOutlined,RightCircleOutlined} from '@ant-design/icons';
-{/* <UserDeleteOutlined /> <RightCircleOutlined /> */}
+
 export default class LikeList extends Component {
     state ={ 
         timeNow :'' , 

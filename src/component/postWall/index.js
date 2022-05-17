@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Dropdown, Button } from 'antd';
-import {Redirect,Switch,Route,BrowserRouter} from 'react-router-dom';
+import {Redirect,Switch,Route} from 'react-router-dom';
 import "./postwall.css"
 import { BellOutlined,UserOutlined,LikeOutlined} from '@ant-design/icons';
 import Post from '../Post';
@@ -10,7 +10,8 @@ import EditProfile from '../editProfile';
 import AddPost from '../addPost';
 import LikeList from '../likeList'
 import FanPage from '../fanPage';
-// import Login from "../Login"
+import Login from "../Login"
+
 export default class PostWall extends Component {
   
   
@@ -49,7 +50,6 @@ export default class PostWall extends Component {
   render() {
     
     return (
-      <BrowserRouter>
       <div className="wrap">
         <div className="header">
           <h3>MetaWall</h3>
@@ -67,8 +67,8 @@ export default class PostWall extends Component {
             <Route path="/Track" component={Track} />
             <Route path="/edit" component={EditProfile} />
             <Route path="/likeList" component={LikeList} />
-            <Route path="/login" component={FanPage} />
-            <Redirect to="/post" />
+            <Route path="/" component={Login} />
+            <Redirect to="/" />
           </Switch>
           
           <div className="sidebar">
@@ -80,7 +80,7 @@ export default class PostWall extends Component {
           
         </div>
       </div>
-      </BrowserRouter>
+      
     )
   }
 }

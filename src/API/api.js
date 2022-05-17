@@ -17,7 +17,7 @@ const apiService = async (router,body={},method="GET") => {
         }else if(method===requestType.patch){
             response =await axios.patch(url,body);
         }
-        return response;
+        return response.data;
     }catch(error){
         const {status,msg} = error.response.data
         message.error(`Error(${status}): ${msg}`,10);

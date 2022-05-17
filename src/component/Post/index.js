@@ -12,9 +12,10 @@ export default class Post extends Component {
       }
     componentDidMount = async () =>{
         let res = await getPost({});
-        if(res.data.status === 200){
-            let UserPost = res.data.data;
-            this.setState({UserPost},()=>console.log(UserPost));
+        console.log(res);
+        if(res.status === 200){
+            let UserPost = res.data;
+            this.setState({UserPost});
         }
     }
     addLikes = () => {

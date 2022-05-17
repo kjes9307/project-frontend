@@ -5,10 +5,13 @@ const getPost = data => apiService('/posts', data, requestType.get);
 
 const addPost = data => apiService('/posts', data, requestType.post);
 
+const userRegistry = data => apiService('/user/register', data, requestType.post);
+
+const userLogin = data => apiService('/user/login', data , requestType.post);
+
 export {
     getPost,
-    addPost
+    addPost,
+    userRegistry,
+    userLogin
 }
-// getPost({key:"3"})
-// .then(function (response) {console.log(response.data)})
-// .catch(function (error) {console.log(error)})

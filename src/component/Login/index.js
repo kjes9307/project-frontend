@@ -10,14 +10,15 @@ export default class Login extends Component {
         loginState : true
       }
     onFinish = (values) => {
-    console.log('Received values of form: ', values);
+      console.log('Received values of form: ', values);
     };
     modeSwitch=()=>{
-    const {loginState} = this.state
-    let status = !loginState
-    this.setState({loginState:status})
+      const {loginState} = this.state
+      let status = !loginState
+      this.setState({loginState:status})
     }
   render() {
+    console.log(this.props,"props Login")
     const {loginState} = this.state
     return (
         <div className='container'>

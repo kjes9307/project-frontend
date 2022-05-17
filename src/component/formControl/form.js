@@ -1,9 +1,10 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { Form, Input, Button, message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 const LoginForm = () => {
   const [form] = Form.useForm();
-  const onFinish = (values) => {
+  const onFinish = async(values) => {
     console.log('Success:', values);
+    this.props.history.push('/post')
   };
 
   const onFinishFailed = (errorInfo) => {
