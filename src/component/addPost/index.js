@@ -27,10 +27,6 @@ export default class AddPost extends Component {
             </div>
             <div className="main">
               <div className="addContain-layout">
-              <img
-                  src={require('../../static/image.png')}
-                  style={{width:50,height:50}}
-                />
               <div>
                 <h4 style={{ 
                             marginTop:16,
