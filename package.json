@@ -1,6 +1,6 @@
 {
-  "name": "my-app",
-  "homepage": "https://kjes9307.github.io/my-app",
+  "name": "project-frontend",
+  "homepage": "https://kjes9307.github.io/project-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
