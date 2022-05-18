@@ -23,10 +23,38 @@ export default class Post extends Component {
         let num = likes+1
         this.setState({likes:num})
     }
-    onSearchPost = (e) => {
-        console.log("onSearch",e);
+    onSearchPost = async(event) => {
+        const {target:{value},keyCode} = event
+        if(keyCode === 13 && value.trim() !== '') {
+            let res = await getPost({key:value});
+            let UserPost = res.data;
+            this.setState({UserPost});
+        }else if(keyCode === 13 &&value.trim() === ''){
+            console.log("被清空啦")
+            let res = await getPost({});
+            let UserPost = res.data;
+            this.setState({UserPost});
+        }
     }
-  render() {
+    ClickSearch = async() =>{
+        const {value} = this.searchInput
+        console.log(value)
+        if(value.trim() !== ''){
+            let res = await getPost({key:value});
+            let UserPost = res.data;
+            this.setState({UserPost});
+
+        }
+    }
+    handleSort = async(e) => {
+        console.log("filter",e.target.value)
+        const {value} = e.target
+        let res = await getPost({timeSort:value});
+        let UserPost = res.data;
+        this.setState({UserPost});
+    }
+    
+    render() {
     const  {UserPost} = this.state
 
     return ( 
@@ -34,21 +62,22 @@ export default class Post extends Component {
         <div className='postSearch'>
             <select defaultValue="最新的貼文" 
                     style={{ width: "156px",fontSize: "16px" , border: "2px solid #000400",height:"46px" ,background: "#FFF"}} 
-                    onChange={this.handleChange}>
-              <option value="最新的貼文">最新的貼文</option>
-              <option value="test">test</option>
+                    onChange={this.handleSort}>
+              <option value="desc">新到舊的貼文</option>          
+              <option value="asc">舊到新貼文</option> 
             </select>
             <input 
                 placeholder="搜尋貼文" 
                 type="search"
-                onChange={this.onSearchPost} 
+                ref={(e) => this.searchInput = e} 
+                onKeyUp={this.onSearchPost}
                 style={{ padding:"12px 16px",width: "319px",fontSize: "16px",border: "2px solid #000400",height:"46px",opacity: "1",background: "#FFF"}} />
             <div  style={{cursor:"pointer",border: "2px solid #000400",height:"46px",width:"46px",marginLeft:"-12px",position:"relative",background: "#03438D"}}>
-                <SearchOutlined style={{fontSize: "20px", opacity: "1",position:"absolute",left:"12px",top:"13px",color:"#fff"}} />
+                <SearchOutlined onClick={this.ClickSearch} style={{fontSize: "20px", opacity: "1",position:"absolute",left:"12px",top:"13px",color:"#fff"}} />
             </div>
         </div>
         { UserPost.length !==0 ?UserPost.map((x)=> (
-        <div className="main" key={x.name}>
+        <div className="main" key={x._id}>
             <div className="postAvatar" style={{backgroundImage: `url(${ x.user ? x.user.photo : null})` }}>
               <h3 style={{ whiteSpace:"nowrap"}}>{x.name}</h3>
               <span>{x.createAt}</span>

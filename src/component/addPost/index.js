@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
-import { Input } from 'antd';
+import { Input, Button } from 'antd';
 import PostImg from "../../static/image.png"
 import "./addContain.css"
 import {addPost} from "../../API"
 const { TextArea } = Input;
 export default class AddPost extends Component {
+  state = {
+    inputText :""
+  }
   onTextChange = e => {
-    console.log('Change:', e.target.value);
+    let inputText = e.target.value;
+    this.setState({inputText})
   };
   addNewPost = async() =>{
+    const {inputText} = this.state;
     let data = {
-      name: 123,
-      content: "123",
+      content:`${inputText}`,
       tags : "心情",
-      type : "",
-      user : "6281e21843b0a3a5f7187d55"
-  }
+      type : "group"  
+    }
     let resposne = await addPost(data);
     console.log("really data =",resposne)
+    if(resposne.status === 200){
+      this.setState({inputText:""});
+      this.props.history.push('/post/wall');
+    }
   }
   render() {
+    console.log(this.props)
     return (
       <div>
             <div className="module-bar">
@@ -37,14 +45,15 @@ export default class AddPost extends Component {
                 <TextArea showCount maxLength={100} style={{ height: 169 , width: 469 }} onChange={this.onTextChange} ></TextArea>
               </div>
               <div style={{ width: 469}}>
-              <button
-                style={{cursor:"pointer",
+              <Button
+                style={{
                         color: "#fff",
                         marginTop:16,
                         marginBottom:16,
                         background: "black",
                         width:128,
-                        height:32}}>上傳圖片</button>
+                        height:32}} 
+                        disabled>上傳圖片</Button>
               
               <img src={PostImg} style={{ height: 169 , width: 469 }} alt=""></img>
               </div>

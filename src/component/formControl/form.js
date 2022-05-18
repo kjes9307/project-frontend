@@ -5,7 +5,6 @@ import userStatuRecorder from "../../util/memoryParams";
 import memoryService from "../../util/memoryUtil";
 
 const LoginForm = (params) => {
-  console.log("@",userStatuRecorder);
   const [form] = Form.useForm();
   const {action} = params
   const onSubmit = async (values) => {
