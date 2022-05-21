@@ -5,6 +5,7 @@ import 'antd/dist/antd.min.css'
 import './App.css';
 import PostWall from './component/postWall';
 import Login from './component/Login';
+import ChatRoom from "./component/chatRoom"
 import userStatuRecorder from "./util/memoryParams";
 class App extends React.Component {
   componentDidMount = () => {
@@ -15,9 +16,10 @@ class App extends React.Component {
   render(){
       return ( 
           <Switch>
-            <Route path="/post" component={PostWall} />
-            <Route path="/" component={Login} />
-            <Redirect to="/" />
+            {/* <Route path="/post" component={PostWall} /> */}
+            {/* <Route path="/" component={Login} /> */}
+            <Route path='/chatRoom' component={ChatRoom} />
+            <Redirect to="/chatRoom" />
           </Switch>
       )
   }
