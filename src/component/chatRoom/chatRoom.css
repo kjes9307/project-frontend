@@ -1,12 +1,11 @@
 
 .wrap-chat{
-    width: 300px;
+    width: 533px;
     height: 550px;
-    margin: auto;
     padding: 20px;
     border-radius: 20px;
 }
-.contain {
+.contain-chat {
     border: 1px solid #000;
     border-radius: 10px;
     background: #fff;
@@ -19,11 +18,14 @@
     overflow: hidden;
 }
 
-.header{
+.header-chat{
     background: #ededed;
     margin: -10px -10px 8px -10px;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #ddd;
+    height: 50px;
+    padding: 10px;
+    line-height: 2em;
 }
 .home-btn{
     height: 45px;
@@ -79,7 +81,7 @@
     padding: 10px;
     box-sizing: border-box;
     font-size: 18px;
-    width: 180px;
+    width: 400px;
     height: 40px;
     border: none;
     display: inline-block;

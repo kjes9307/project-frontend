@@ -10,6 +10,7 @@ import EditProfile from '../editProfile';
 import AddPost from '../addPost';
 import LikeList from '../likeList';
 import FanPage from '../fanPage';
+import ChatRoom from "../chatRoom"
 
 export default class PostWall extends Component {
   handleChange= (value) => {
@@ -63,6 +64,7 @@ export default class PostWall extends Component {
             <Route path="/post/Track" component={Track} />
             <Route path="/post/edit" component={EditProfile} />
             <Route path="/post/likeList" component={LikeList} />
+            <Route path='/post/chatRoom' component={ChatRoom} />
             <Redirect to="/post/wall" />
           </Switch>
           
@@ -71,6 +73,7 @@ export default class PostWall extends Component {
             <MyNavLink to="/post/wall" ><Button type="text" icon={<UserOutlined className='icon'/>}>邊緣人物</Button></MyNavLink>
             <MyNavLink to="/post/Track"><Button type="text" icon={<BellOutlined className='icon'/>}>追蹤名單</Button></MyNavLink>
             <MyNavLink to="/post/likeList"><Button type="text" icon={<LikeOutlined className='icon'/>}>按讚的文章</Button></MyNavLink>
+            <MyNavLink to="/post/chatRoom"><Button type="text" icon={<LikeOutlined className='icon'/>}>聊天室</Button></MyNavLink>
          </div>
           
         </div>
