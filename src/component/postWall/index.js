@@ -9,13 +9,18 @@ import Track from '../Track';
 import EditProfile from '../editProfile';
 import AddPost from '../addPost';
 import LikeList from '../likeList';
-import FanPage from '../fanPage';
+import memoryParams from "../../util/memoryParams"
+import memoryService from "../../util/memoryUtil"
 
 export default class PostWall extends Component {
   handleChange= (value) => {
     console.log(`selected ${value}`);
   }
   onSearch = value => console.log(value);
+  Logout = () =>{
+    memoryParams.length = 0 ;
+    memoryService.removeUser();
+  }
   menu = () => (
     <Menu
       style={{width:182,textAlign: "center",fontWeight:"bold"}}
@@ -36,7 +41,7 @@ export default class PostWall extends Component {
         },
         {
           label: (
-            <MyNavLink to="/login" >
+            <MyNavLink onClick={this.Logout} to="/login" >
               登出
             </MyNavLink>
           ),
