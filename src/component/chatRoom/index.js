@@ -1,7 +1,46 @@
 import React, { Component } from 'react'
-import {Button} from "antd"
+import {Button, message} from "antd"
 import "./chatRoom.css"
+import {sendMsg} from "../../API"
+import io from 'socket.io-client'
+
+
 export default class ChatRoom extends Component {
+  state = {
+    textInput:""
+  }
+  componentDidMount = () =>{
+  }
+  initIO = (res) =>{
+    if(!io.socket){
+      io.socket = io('ws://localhost:3000')
+      io.socket.on("receiveMsg",(data)=>{
+        console.log('瀏覽器端接收訊息',data)
+      })
+    }
+    io.socket.emit("sendMsg",res.data)
+  }
+  inputMsg = (e) => {
+    const {value} = e.target
+    this.setState({textInput:value})
+  }
+  submitMsg = async()=>{
+    const {textInput} = this.state;
+    console.log(textInput);
+    if(textInput.trim()){
+      let data = {
+        content : textInput,
+        read : true,
+        to : "6281e21843b0a3a5f7187d54" 
+      }
+      console.log(data)
+      let res = await sendMsg(data);
+      if(res.status === 200){
+        this.initIO(res)
+        message.success("發送成功")
+      }
+    }
+  }
   render() {
     return (
         <div className="wrap-chat">
@@ -14,8 +53,8 @@ export default class ChatRoom extends Component {
             </div>
     
             <div className="subchat">
-                <input type="text" id="message" />
-                <Button type="primary" style={{marginLeft:15}}>Send</Button>
+                <input onChange={this.inputMsg} value={this.state.textInput} type="text" id="message" />
+                <Button type="primary"  style={{marginLeft:15}} onClick={this.submitMsg} >Send</Button>
             </div>
         </div>
     </div>
