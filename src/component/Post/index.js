@@ -3,6 +3,7 @@ import "./post.css"
 import {LikeOutlined,UserOutlined,SearchOutlined} from '@ant-design/icons';
 import DefaultPost from '../Default';
 import {getPost} from "../../API"
+import moment from "moment"
 
 export default class Post extends Component {
     state ={
@@ -81,7 +82,7 @@ export default class Post extends Component {
             {x.user.photo ?
             <div className="postAvatar" style={{backgroundImage: `url(${x.user.photo})` }}>
               <h3 style={{ whiteSpace:"nowrap"}}>{x.name}</h3>
-              <span>{x.createAt}</span>
+              <span>{moment(x.createAt).format('YYYY-MM-DD HH:mm:ss')}</span>
             </div>
             : 
             <div className="postAvatar">
@@ -89,7 +90,7 @@ export default class Post extends Component {
                 <UserOutlined style={{fontSize: '28px',position:"absolute",left:"8px",top:"6px"}}/>
                 </div>
               <h3 style={{ whiteSpace:"nowrap"}}>{x.name}</h3>
-              <span>{x.createAt}</span>
+              <span>{moment(x.createAt).format('YYYY-MM-DD HH:mm:ss')}</span>
             </div>
             }
             <div className="postBody">
@@ -100,8 +101,7 @@ export default class Post extends Component {
             <div className="postImg" >
             { x.image !== ""?
               <img 
-                // style={{backgroundImage: `url(${x.image})`}}
-                src='https://hexschool.github.io/flexImgUrl/3/logo.png' alt = 'stupid react shit'
+                src={x.image} alt = 'upload' style={{maxHeight:169,maxWidth:533,objectFit: "cover"}}
                 />
             : null}
             </div>

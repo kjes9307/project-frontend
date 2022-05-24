@@ -9,9 +9,12 @@ const userRegistry = data => apiService('/user/register', data, requestType.post
 
 const userLogin = data => apiService('/user/login', data , requestType.post);
 
+const uploadImg = data => apiService('/user/uploadImg', data , requestType.post)
+
 export {
     getPost,
     addPost,
     userRegistry,
-    userLogin
+    userLogin,
+    uploadImg
 }

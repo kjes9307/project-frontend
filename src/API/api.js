@@ -7,14 +7,15 @@ import authGenerator from '../util/authGenerator';
 const apiService = async (router,body={},method="GET") => {
     try{
         let response ;
-        let urlPrefix = "https://morning-ocean-14546.herokuapp.com"
+        let urlPrefix = true ? "http://localhost:3000" : "https://morning-ocean-14546.herokuapp.com"
         let url = urlPrefix+router;
         console.log("request url",url,body)
         message.loading({ content: 'Source Loading...', key:'update'});
         if(method===requestType.get){
             response =await axios.get(url,{params:body});
         }else if(method===requestType.post){
-            response =await axios.post(url,body, authGenerator(memoryParams[0]));
+            let type = router === "/user/uploadImg" ? "upload" :"default"
+            response =await axios.post(url,body, authGenerator(memoryParams[0],type));
         }else if(method===requestType.delete){
             response =await axios.delete(url,body);
         }else if(method===requestType.patch){
