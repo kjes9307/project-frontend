@@ -61,7 +61,7 @@ export default class PostWall extends Component {
           <div className="title">
             <div className="avatar" style={{backgroundImage: `url(${user.photo})`}}></div>
               <Dropdown overlay={this.menu} placement="bottom" arrow={{ pointAtCenter: true }}>
-                <span>Member</span>
+                <span>{userName}</span>
               </Dropdown>
           </div>
         </div>
