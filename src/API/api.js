@@ -7,7 +7,7 @@ import authGenerator from '../util/authGenerator';
 const apiService = async (router,body={},method="GET") => {
     try{
         let response ;
-        let urlPrefix = true ? "http://localhost:3000" : "https://morning-ocean-14546.herokuapp.com"
+        let urlPrefix = "https://morning-ocean-14546.herokuapp.com"
         let url = urlPrefix+router;
         // console.log("request url",url,body)
         message.loading({ content: 'Source Loading...', key:'update'});
