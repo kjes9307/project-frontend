@@ -34,7 +34,6 @@ export default class AddPost extends Component {
     let file = new FormData();
     file.append('file',upload);
     let resposne = await uploadImg(file);
-    console.log(resposne);
     if(resposne.status === 200){
       this.setState({uploalUrl:resposne.data.url,upload:"",uploadStatus:true})
     }
@@ -44,15 +43,6 @@ export default class AddPost extends Component {
     if(files[0]){
       this.setState({upload:files[0],uploadStatus:false}, async()=> await this.sendReq());
     }
-    // if (info.file.status !== 'uploading') {
-    //   console.log(info.file, info.fileList);
-    // }
-
-    // if (info.file.status === 'done') {
-    //   message.success(`${info.file.name} file uploaded successfully`);
-    // } else if (info.file.status === 'error') {
-    //   message.error(`${info.file.name} file upload failed.`);
-    // }
   }
   render() {
     return (
@@ -72,7 +62,7 @@ export default class AddPost extends Component {
                 <TextArea showCount maxLength={100} style={{ height: 169 , width: 469 }} onChange={this.onTextChange} ></TextArea>
               </div>
               <div style={{ width: 469 }}>
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" encType="multipart/form-data">
                   <label style={{
                             color: "#fff",
                             background: "black",

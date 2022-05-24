@@ -13,7 +13,6 @@ export default class Post extends Component {
       }
     componentDidMount = async () =>{
         let res = await getPost({});
-        console.log(res);
         if(res.status === 200){
             let UserPost = res.data;
             this.setState({UserPost});
@@ -81,7 +80,7 @@ export default class Post extends Component {
         <div className="main" key={x._id}>
             {x.user.photo ?
             <div className="postAvatar" style={{backgroundImage: `url(${x.user.photo})` }}>
-              <h3 style={{ whiteSpace:"nowrap"}}>{x.name}</h3>
+              <h3 style={{ whiteSpace:"nowrap"}}>{x.user.name}</h3>
               <span>{moment(x.createAt).format('YYYY-MM-DD HH:mm:ss')}</span>
             </div>
             : 

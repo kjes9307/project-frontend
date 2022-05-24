@@ -9,12 +9,20 @@ const userRegistry = data => apiService('/user/register', data, requestType.post
 
 const userLogin = data => apiService('/user/login', data , requestType.post);
 
-const uploadImg = data => apiService('/user/uploadImg', data , requestType.post)
+const uploadImg = data => apiService('/user/uploadImg', data , requestType.post);
 
+const resetPASS = data => apiService('/user/reset', data, requestType.post);
+
+const updataProfile = data => apiService('/user/updateUser',data , requestType.patch);
+
+const getProfile = data => apiService('/user/profile',data, requestType.get);
 export {
     getPost,
     addPost,
     userRegistry,
     userLogin,
-    uploadImg
+    uploadImg,
+    resetPASS,
+    updataProfile,
+    getProfile
 }

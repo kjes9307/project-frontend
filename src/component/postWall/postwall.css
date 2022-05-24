@@ -42,7 +42,6 @@ html , body{
     color: #f24;
 }
 .avatar {
-    background-image: url('../../static/user.png');
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover ;

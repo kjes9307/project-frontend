@@ -9,17 +9,26 @@ const apiService = async (router,body={},method="GET") => {
         let response ;
         let urlPrefix = true ? "http://localhost:3000" : "https://morning-ocean-14546.herokuapp.com"
         let url = urlPrefix+router;
-        console.log("request url",url,body)
+        // console.log("request url",url,body)
         message.loading({ content: 'Source Loading...', key:'update'});
         if(method===requestType.get){
-            response =await axios.get(url,{params:body});
+            let type = "default"
+            let token = authGenerator(memoryParams[0],type)
+            response =
+            await axios({
+                method: 'GET',
+                url,
+                headers:token.headers,
+                params:body
+            });
         }else if(method===requestType.post){
             let type = router === "/user/uploadImg" ? "upload" :"default"
             response =await axios.post(url,body, authGenerator(memoryParams[0],type));
         }else if(method===requestType.delete){
             response =await axios.delete(url,body);
         }else if(method===requestType.patch){
-            response =await axios.patch(url,body);
+            let type = "default"
+            response =await axios.patch(url,body, authGenerator(memoryParams[0],type));
         }
         message.success({ content: 'Success', key:'update',duration: 2});
         return response.data;

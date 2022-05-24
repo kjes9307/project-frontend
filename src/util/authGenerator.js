@@ -2,7 +2,6 @@ const authGenerator = (memoryParams,type) => {
     
     if(type === "default"){
 
-        console.log("@default")
         return {headers: {'Authorization': `Bearer ${memoryParams}`}} 
     }else{
         console.log("@upload")

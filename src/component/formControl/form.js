@@ -3,6 +3,7 @@ import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import {userRegistry,userLogin} from '../../API'
 import userStatuRecorder from "../../util/memoryParams";
 import memoryService from "../../util/memoryUtil";
+import userInfo from "../../util/memoryUser"
 
 const LoginForm = (params) => {
   const [form] = Form.useForm();
@@ -22,6 +23,11 @@ const LoginForm = (params) => {
       else{ 
         resposne = await userLogin(values);
         if(resposne.status === 200){  
+          let obj = {}
+          obj.sex = resposne.data.sex;
+          obj.name = resposne.data.name;
+          obj.photo = resposne.data.photo;
+          userInfo.saveUser(obj);
           userStatuRecorder[0]= resposne.data.token;
           memoryService.saveUser(resposne.data.token);
           message.success("Login Success",2)

@@ -11,6 +11,7 @@ import AddPost from '../addPost';
 import LikeList from '../likeList';
 import memoryParams from "../../util/memoryParams"
 import memoryService from "../../util/memoryUtil"
+import userInfo from "../../util/memoryUser"
 
 export default class PostWall extends Component {
   handleChange= (value) => {
@@ -20,6 +21,7 @@ export default class PostWall extends Component {
   Logout = () =>{
     memoryParams.length = 0 ;
     memoryService.removeUser();
+    userInfo.removeUser();
   }
   menu = () => (
     <Menu
@@ -50,12 +52,14 @@ export default class PostWall extends Component {
     />
   );
   render() {
+    let user = userInfo.getUser();
+    let userName = user.name ? user.name : "unknown";
     return (
       <div className="wrap">
         <div className="header">
           <h3>MetaWall</h3>
           <div className="title">
-            <div className="avatar"></div>
+            <div className="avatar" style={{backgroundImage: `url(${user.photo})`}}></div>
               <Dropdown overlay={this.menu} placement="bottom" arrow={{ pointAtCenter: true }}>
                 <span>Member</span>
               </Dropdown>
@@ -73,7 +77,7 @@ export default class PostWall extends Component {
           
           <div className="sidebar">
             <MyNavLink to="/post/addPost"><Button type="primary" className='add-btn'>張貼動態</Button></MyNavLink>
-            <MyNavLink to="/post/wall" ><Button type="text" icon={<UserOutlined className='icon'/>}>邊緣人物</Button></MyNavLink>
+            <MyNavLink to="/post/wall" ><Button type="text" icon={<UserOutlined className='icon'/>}>{userName}</Button></MyNavLink>
             <MyNavLink to="/post/Track"><Button type="text" icon={<BellOutlined className='icon'/>}>追蹤名單</Button></MyNavLink>
             <MyNavLink to="/post/likeList"><Button type="text" icon={<LikeOutlined className='icon'/>}>按讚的文章</Button></MyNavLink>
          </div>

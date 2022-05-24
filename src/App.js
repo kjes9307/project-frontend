@@ -9,7 +9,7 @@ import userStatuRecorder from "./util/memoryParams";
 class App extends React.Component {
   componentDidMount = () => {
     if(userStatuRecorder.length!==0){
-      console.log(this.props.history.replace('/post'))
+      this.props.history.replace('/post');
     }
   }
   render(){
