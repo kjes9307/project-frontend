@@ -5,6 +5,10 @@ const getPost = data => apiService('/posts', data, requestType.get);
 
 const addPost = data => apiService('/posts', data, requestType.post);
 
+const addLikes = (data) => apiService(`/posts/addlike/${data}`,[],requestType.post);
+
+const delLikes = (data) => apiService(`/posts/deletelike/${data}`,[],requestType.post);
+
 const userRegistry = data => apiService('/user/register', data, requestType.post);
 
 const userLogin = data => apiService('/user/login', data , requestType.post);
@@ -16,6 +20,7 @@ const resetPASS = data => apiService('/user/reset', data, requestType.post);
 const updataProfile = data => apiService('/user/updateUser',data , requestType.patch);
 
 const getProfile = data => apiService('/user/profile',data, requestType.get);
+
 export {
     getPost,
     addPost,
@@ -24,5 +29,7 @@ export {
     uploadImg,
     resetPASS,
     updataProfile,
-    getProfile
+    getProfile,
+    addLikes,
+    delLikes
 }

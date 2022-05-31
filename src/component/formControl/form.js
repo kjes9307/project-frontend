@@ -27,6 +27,7 @@ const LoginForm = (params) => {
           obj.sex = resposne.data.sex;
           obj.name = resposne.data.name;
           obj.photo = resposne.data.photo || "https://i.imgur.com/2qPisdC.png";
+          obj.id = resposne.data.id;
           userInfo.saveUser(obj);
           userStatuRecorder[0]= resposne.data.token;
           memoryService.saveUser(resposne.data.token);

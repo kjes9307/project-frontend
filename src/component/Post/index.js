@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import "./post.css"
 import {LikeOutlined,UserOutlined,SearchOutlined} from '@ant-design/icons';
 import DefaultPost from '../Default';
-import {getPost} from "../../API"
+import userInfo from "../../util/memoryUser"
+import {getPost,addLikes,delLikes} from "../../API"
 import moment from "moment"
 
 export default class Post extends Component {
     state ={
         timeNow : "",
-        likes:1 ,
         UserPost: []
       }
     componentDidMount = async () =>{
@@ -18,10 +18,19 @@ export default class Post extends Component {
             this.setState({UserPost});
         }
     }
-    addLikes = () => {
-        const {likes} = this.state;
-        let num = likes+1
-        this.setState({likes:num})
+    addLikes = async (postID,postLikes) => {
+        const {UserPost} = this.state;
+        let userID = userInfo.getUser().id;
+        let res ;
+        if(postLikes.indexOf(userID) === -1) res = await addLikes(postID);
+        else res = await delLikes(postID);
+        const { status, data:{_id, likes} } = res;
+        UserPost.forEach(x=> {
+            if(status===201&& _id === x._id){
+                x.likes = likes
+            }
+        });
+        this.setState({UserPost});
     }
     onSearchPost = async(event) => {
         const {target:{value},keyCode} = event
@@ -53,10 +62,11 @@ export default class Post extends Component {
         let UserPost = res.data;
         this.setState({UserPost});
     }
-    
+    componentWillUnmount = () =>{
+        this.setState = () => false;
+    }
     render() {
     const  {UserPost} = this.state
-
     return ( 
         <div className='postContain'>
         <div className='postSearch'>
@@ -105,7 +115,7 @@ export default class Post extends Component {
             : null}
             </div>
             <div className="user-action">
-                <LikeOutlined onClick={this.addLikes} style={{marginLeft:'24px',fontSize: '20px'}} />&nbsp;<span style={{fontSize: '16px'}}>{x.likes}</span>
+                <LikeOutlined onClick={()=>this.addLikes(x._id,x.likes)} style={{marginLeft:'24px',fontSize: '20px'}} />&nbsp;<span style={{fontSize: '16px'}}>{x.likes.length || 0}</span>
             </div>
             <div className="user-comment">
                 <div style={{position:"relative",fontSize: '20px',border: "1px solid black",height:"46px",width:"46px",borderRadius:"50% 50% 50% 50%"}}>
