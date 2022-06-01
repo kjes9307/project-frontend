@@ -11,3 +11,5 @@ const userInfo = {
 }
 
 export default userInfo;
+
+// to record user basic info
