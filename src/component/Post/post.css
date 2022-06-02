@@ -111,7 +111,7 @@
     height: 40px;
     width: 40px;
     display: inline-block;
-    border: 1px solid black;
+    border: 0px solid black;
     border-radius: 50% 50% 50% 50%;
     margin-top: 18px;
     margin-left: 16px;
@@ -128,4 +128,13 @@
     margin-left: 68px;
     margin-top: 4px;
     margin-right: 10px;
+}
+.delBtn{
+    font-size: 8px;
+    margin-left: 2px;
+}
+.delBtn:hover {
+    cursor: pointer;
+    color: #f24;
+    font-size: 8px;
 }

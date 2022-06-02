@@ -25,7 +25,8 @@ const apiService = async (router,body={},method="GET") => {
             let type = router === "/user/uploadImg" ? "upload" :"default"
             response =await axios.post(url,body, authGenerator(memoryParams[0],type));
         }else if(method===requestType.delete){
-            response =await axios.delete(url,body);
+            let type = "default"
+            response =await axios.delete(url, authGenerator(memoryParams[0],type), body);
         }else if(method===requestType.patch){
             let type = "default"
             response =await axios.patch(url,body, authGenerator(memoryParams[0],type));
