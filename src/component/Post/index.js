@@ -3,20 +3,34 @@ import "./post.css"
 import {LikeOutlined,UserOutlined,SearchOutlined} from '@ant-design/icons';
 import DefaultPost from '../Default';
 import userInfo from "../../util/memoryUser"
-import {getPost,addLikes,delLikes} from "../../API"
+import {getPost,addLikes,delLikes,addComment,delComment} from "../../API"
 import moment from "moment"
 
 export default class Post extends Component {
     state ={
         timeNow : "",
-        UserPost: []
+        UserPost: [],
+        commentText: "",
+        postID:""
       }
     componentDidMount = async () =>{
         let res = await getPost({});
         if(res.status === 200){
             let UserPost = res.data;
-            this.setState({UserPost});
+            let newUserPost = this.addFlag(UserPost)
+            this.setState({UserPost:newUserPost});
         }
+    }
+    addFlag = (data) =>{
+        let userID = userInfo.getUser().id;
+        data.forEach(x=>{
+            x.comments.forEach(info=>{
+                if(info.user._id === userID){
+                    info.flag = 'Y';
+                }
+            })
+        })
+        return data;
     }
     addLikes = async (postID,postLikes) => {
         const {UserPost} = this.state;
@@ -61,6 +75,46 @@ export default class Post extends Component {
         let res = await getPost({timeSort:value});
         let UserPost = res.data;
         this.setState({UserPost});
+    }
+    recordComment = (editID,e) =>{
+        const {postID} = this.state
+        if(editID !== postID) {
+            this.setState({postID:"",commentText:""});
+        }
+        const {value} = e.target
+        this.setState({postID:editID, commentText:value});
+    }
+    clearMsg = (e) =>{
+        e.target.value="";
+    }
+    sendComment = async () =>{
+        const {commentText,postID} = this.state;
+        let obj ={};
+        obj['userComment'] = commentText ; 
+        let res = await addComment(postID,obj);
+        
+        if(res.status===201 && res.data){
+            let newRes = await getPost({});
+            let UserPost = newRes.data;
+            let newUserPost = this.addFlag(UserPost)
+            this.setState({UserPost:newUserPost});
+        }
+        this.setState({commentText:"",postID:""})
+    }
+    deleteComment = async (postID) =>{
+        let res = await delComment(postID)
+        if(res.status===200){
+            let newRes = await getPost({});
+            let UserPost = newRes.data;
+            let newUserPost = this.addFlag(UserPost)
+            this.setState({UserPost:newUserPost});
+        }
+    }
+    sendCommentByEnter = (e) =>{
+        const {keyCode} = e
+        if(keyCode === 13){
+            this.sendComment();
+        }
     }
     componentWillUnmount = () =>{
         this.setState = () => false;
@@ -121,25 +175,46 @@ export default class Post extends Component {
                 <div style={{position:"relative",fontSize: '20px',border: "1px solid black",height:"46px",width:"46px",borderRadius:"50% 50% 50% 50%"}}>
                 <UserOutlined style={{fontSize: '28px',position:"absolute",left:"8px",top:"6px"}}/>
                 </div>
-                <input placeholder='請輸入留言' style={{padding:"8px 16px",width:'308.5px',marginLeft:'8.5px',height:"40px",border: "2px solid #000400"}} />
-                <button children='留言' style={{cursor:"pointer",width:'128px',height:"40px",border: "2px solid #000400",background: "#03438D" ,color:"#fff"}}  />
+                <input 
+                    onBlur={this.clearMsg} 
+                    onChange={(e)=>this.recordComment(x.id,e)} 
+                    placeholder='請輸入留言' 
+                    style={{
+                        padding:"8px 16px",
+                        width:'308.5px',
+                        marginLeft:'8.5px',
+                        height:"40px",
+                        border: "2px solid #000400"}} 
+                    />
+                <button  
+                    onClick={this.sendComment} 
+                    children='留言' 
+                    style={{
+                        cursor:"pointer",
+                        width:'128px',
+                        height:"40px",
+                        border: "2px solid #000400",
+                        background: "#03438D" ,
+                        color:"#fff"}}  
+                    />
             </div>
-            {/* { x.comment.length !==0? x.comment.map(post=>(
-                <div className="user-post" key={post.name}>
+            { x.comments.length !==0? x.comments.map(post=>(
+                <div className="user-post" key={post._id}>
                     <div className="user-img">
-                        <UserOutlined style={{fontSize: '28px',position:"absolute",left:"5px",top:"3px"}}/>
+                        {post.user.photo ?<img src={post.user.photo} alt="user_img" style={{width:40,height:40,borderRadius: 50,position:"absolute",left: 0,top: 0 ,border: "1px solid #000400"}} /> :
+                        <UserOutlined style={{fontSize: '28px',position:"absolute",left:"5px",top:"3px"}}/>}
                         <div className="commentInfo">
-                            <h5 style={{fontSize:"16px",fontFamily:"Noto Sans TC",whiteSpace: "nowrap",letterSpacing: "0px",color: "#000400"}}>{post.name}</h5>
-                            <span style={{fontSize:"12px",fontFamily:"Baloo Da 2",whiteSpace: "nowrap",color: "#9B9893"}}>{timeNow}</span>
+                            <h5 style={{fontSize:"16px",fontFamily:"Noto Sans TC",whiteSpace: "nowrap",letterSpacing: "0px",color: "#000400"}}>{post.user.name}</h5>
+                            <span style={{fontSize:"12px",fontFamily:"Baloo Da 2",whiteSpace: "nowrap",color: "#9B9893"}}>{moment(post.createTime).format('YYYY-MM-DD HH:mm:ss')} &nbsp;<span className='delBtn' onClick={()=>this.deleteComment(post._id)}>{post.flag?"刪除貼文":null}</span></span>
                         </div>
                     </div>
                     <div className="commentText">
                         <span style={{fontSize:"16px",fontFamily:"Noto Sans TC",letterSpacing: "0px",color: "#000400",textAlign: "left"}}>
-                            {post.comment}
+                            {post.userComment}
                         </span> 
                     </div> 
                 </div>
-            )): null} */}
+            )): null}
         </div>
         )):<DefaultPost />}
     </div>  

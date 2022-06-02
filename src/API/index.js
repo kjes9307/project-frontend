@@ -7,6 +7,10 @@ const addPost = data => apiService('/posts', data, requestType.post);
 
 const addLikes = (data) => apiService(`/posts/addlike/${data}`,[],requestType.post);
 
+const addComment = (postID,data) => apiService(`/posts/comment/${postID}`,data,requestType.post)
+
+const delComment = postID => apiService(`/posts/delcomment/${postID}`,[],requestType.delete)
+ 
 const delLikes = (data) => apiService(`/posts/deletelike/${data}`,[],requestType.post);
 
 const userRegistry = data => apiService('/user/register', data, requestType.post);
@@ -31,5 +35,7 @@ export {
     updataProfile,
     getProfile,
     addLikes,
-    delLikes
+    delLikes,
+    addComment,
+    delComment
 }
