@@ -44,6 +44,9 @@ export default class AddPost extends Component {
       this.setState({upload:files[0],uploadStatus:false}, async()=> await this.sendReq());
     }
   }
+  componentWillUnmount = () =>{
+    this.setState = () => false;
+  }
   render() {
     return (
       <div>
