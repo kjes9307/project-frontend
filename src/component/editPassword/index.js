@@ -15,6 +15,9 @@ export default class EditPassword extends Component {
     const {show} = this.state
     this.setState({show:!show})
   }
+  componentWillUnmount = () =>{
+    this.setState = () => false;
+  }
   render() {
     return (
     <div>

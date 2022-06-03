@@ -95,6 +95,9 @@ export default class EditProfile extends Component {
           this.setState({sexType:""})
       }
   }
+  componentWillUnmount = () =>{
+    this.setState = () => false;
+}
   render() {
     const { tab1,tab2,confirmPassWord,newPassWord } = this.state
     return (

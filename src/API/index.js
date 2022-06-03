@@ -3,6 +3,8 @@ import requestType from "../util/define";
 
 const getPost = data => apiService('/posts', data, requestType.get);
 
+const getSinglePost = data => apiService('/posts/singlePost', data, requestType.get);
+
 const addPost = data => apiService('/posts', data, requestType.post);
 
 const addLikes = (data) => apiService(`/posts/addlike/${data}`,[],requestType.post);
@@ -25,6 +27,8 @@ const updataProfile = data => apiService('/user/updateUser',data , requestType.p
 
 const getProfile = data => apiService('/user/profile',data, requestType.get);
 
+const getLikeList = data => apiService('/user/getLikeList',data ,requestType.get);
+
 export {
     getPost,
     addPost,
@@ -37,5 +41,7 @@ export {
     addLikes,
     delLikes,
     addComment,
-    delComment
+    delComment,
+    getLikeList,
+    getSinglePost
 }
