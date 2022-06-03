@@ -24,9 +24,8 @@
     height: 77.5px;
     width: 80px;
     border-radius: 8px 0px 0px 8px;
-    background: url("https://i.imgur.com/2qPisdC.png");
     background-position: center;
-    /* background-size: cover; */
+    background-size: cover;
 }
 .module-fan-bar-Text{
     position: absolute;

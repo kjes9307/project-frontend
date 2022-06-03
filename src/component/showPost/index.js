@@ -1,25 +1,16 @@
 import React, { Component } from 'react'
-import "./post.css"
 import {LikeOutlined,UserOutlined,SearchOutlined} from '@ant-design/icons';
-import DefaultPost from '../Default';
 import userInfo from "../../util/memoryUser"
 import {getPost,addLikes,delLikes,addComment,delComment} from "../../API"
 import moment from "moment"
 
-export default class Post extends Component {
+export default class ShowPost extends Component {
     state ={
         timeNow : "",
-        UserPost: [],
         commentText: "",
-        postID:""
+        postID:"",
       }
-    componentDidMount = async () =>{
-        let res = await getPost({});
-        if(res.status === 200){
-            let UserPost = res.data;
-            let newUserPost = this.addFlag(UserPost)
-            this.setState({UserPost:newUserPost});
-        }
+    componentDidMount = () =>{
     }
     addFlag = (data) =>{
         let userID = userInfo.getUser().id;
@@ -110,16 +101,20 @@ export default class Post extends Component {
             this.setState({UserPost:newUserPost});
         }
     }
-    goFanPage = async(usedId)=>{
-        console.log(usedId)
+    sendCommentByEnter = (e) =>{
+        const {keyCode} = e
+        if(keyCode === 13){
+            this.sendComment();
+        }
+    }
+    goFanPage = async(userInfo)=>{
         const {UserPost} = this.state
-        this.props.history.push('/post/fanPage',{usedId,UserPost})
+        this.props.history.push('/post/fanPage',{userInfo,UserPost})
     }
     componentWillUnmount = () =>{
         this.setState = () => false;
     }
     render() {
-    const  {UserPost} = this.state
     return ( 
         <div className='postContain'>
         <div className='postSearch'>
@@ -139,7 +134,7 @@ export default class Post extends Component {
                 <SearchOutlined onClick={this.ClickSearch} style={{fontSize: "20px", opacity: "1",position:"absolute",left:"12px",top:"13px",color:"#fff"}} />
             </div>
         </div>
-        { UserPost.length !==0 ?UserPost.map((x)=> (
+        { this.props.UserPost.length !==0 ? this.props.UserPost.map((x)=> (
         <div className="main" key={x._id}>
             {x.user.photo ?
             <div className="postAvatar" onClick={()=>this.goFanPage(x.user)} style={{backgroundImage: `url(${x.user.photo})` }}>
@@ -215,7 +210,7 @@ export default class Post extends Component {
                 </div>
             )): null}
         </div>
-        )):<DefaultPost />}
+        )):null}
     </div>  
     )
   }
