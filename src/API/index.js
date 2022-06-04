@@ -29,6 +29,8 @@ const getProfile = data => apiService('/user/profile',data, requestType.get);
 
 const getLikeList = data => apiService('/user/getLikeList',data ,requestType.get);
 
+const getUserPost = data => apiService('/user/getUserPost',data ,requestType.get);
+
 export {
     getPost,
     addPost,
@@ -43,5 +45,6 @@ export {
     addComment,
     delComment,
     getLikeList,
-    getSinglePost
+    getSinglePost,
+    getUserPost
 }
