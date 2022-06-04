@@ -1,71 +1,41 @@
 import React, { Component } from 'react'
 import {LikeOutlined,UserOutlined,SearchOutlined} from '@ant-design/icons';
-import userInfo from "../../util/memoryUser"
-import {getPost,addLikes,delLikes,addComment,delComment} from "../../API"
+import {withRouter} from 'react-router-dom';
 import moment from "moment"
+import {addLikes,delLikes,addComment,delComment} from "../../API"
+import userInfo from "../../util/memoryUser"
+import DefaultPost from '../Default';
 
-export default class ShowPost extends Component {
+
+class ShowPost extends Component {
     state ={
         timeNow : "",
         commentText: "",
         postID:"",
       }
-    componentDidMount = () =>{
-    }
-    addFlag = (data) =>{
-        let userID = userInfo.getUser().id;
-        data.forEach(x=>{
-            x.comments.forEach(info=>{
-                if(info.user._id === userID){
-                    info.flag = 'Y';
-                }
-            })
-        })
-        return data;
-    }
+   
     addLikes = async (postID,postLikes) => {
-        const {UserPost} = this.state;
         let userID = userInfo.getUser().id;
         let res ;
         if(postLikes.indexOf(userID) === -1) res = await addLikes(postID);
         else res = await delLikes(postID);
-        const { status, data:{_id, likes} } = res;
-        UserPost.forEach(x=> {
-            if(status===201&& _id === x._id){
-                x.likes = likes
-            }
-        });
-        this.setState({UserPost});
-    }
-    onSearchPost = async(event) => {
-        const {target:{value},keyCode} = event
-        if(keyCode === 13 && value.trim() !== '') {
-            let res = await getPost({key:value});
-            let UserPost = res.data;
-            this.setState({UserPost});
-        }else if(keyCode === 13 &&value.trim() === ''){
-            console.log("被清空啦")
-            let res = await getPost({});
-            let UserPost = res.data;
-            this.setState({UserPost});
+        const { status } = res;
+        if(status===201){
+            await this.props.callStatusChange();
         }
     }
     ClickSearch = async() =>{
         const {value} = this.searchInput
-        console.log(value)
         if(value.trim() !== ''){
-            let res = await getPost({key:value});
-            let UserPost = res.data;
-            this.setState({UserPost});
-
+            await this.props.callStatusChange({key:value});
+        }else{
+            await this.props.callStatusChange();
         }
     }
     handleSort = async(e) => {
         console.log("filter",e.target.value)
         const {value} = e.target
-        let res = await getPost({timeSort:value});
-        let UserPost = res.data;
-        this.setState({UserPost});
+        await this.props.callStatusChange({timeSort:value});
     }
     recordComment = (editID,e) =>{
         const {postID} = this.state
@@ -83,33 +53,20 @@ export default class ShowPost extends Component {
         let obj ={};
         obj['userComment'] = commentText ; 
         let res = await addComment(postID,obj);
-        
+    
         if(res.status===201 && res.data){
-            let newRes = await getPost({});
-            let UserPost = newRes.data;
-            let newUserPost = this.addFlag(UserPost)
-            this.setState({UserPost:newUserPost});
+            await this.props.callStatusChange();
         }
         this.setState({commentText:"",postID:""})
     }
     deleteComment = async (postID) =>{
         let res = await delComment(postID)
         if(res.status===200){
-            let newRes = await getPost({});
-            let UserPost = newRes.data;
-            let newUserPost = this.addFlag(UserPost)
-            this.setState({UserPost:newUserPost});
-        }
-    }
-    sendCommentByEnter = (e) =>{
-        const {keyCode} = e
-        if(keyCode === 13){
-            this.sendComment();
+            await this.props.callStatusChange();
         }
     }
     goFanPage = async(userInfo)=>{
-        const {UserPost} = this.state
-        this.props.history.push('/post/fanPage',{userInfo,UserPost})
+        this.props.history.replace('/post/fanPage',{userInfo})
     }
     componentWillUnmount = () =>{
         this.setState = () => false;
@@ -121,8 +78,8 @@ export default class ShowPost extends Component {
             <select defaultValue="最新的貼文" 
                     style={{ width: "156px",fontSize: "16px" , border: "2px solid #000400",height:"46px" ,background: "#FFF"}} 
                     onChange={this.handleSort}>
-              <option value="desc">新到舊的貼文</option>          
-              <option value="asc">舊到新貼文</option> 
+              <option value="desc">最新貼文</option>          
+              <option value="asc">最舊貼文</option> 
             </select>
             <input 
                 placeholder="搜尋貼文" 
@@ -210,8 +167,9 @@ export default class ShowPost extends Component {
                 </div>
             )): null}
         </div>
-        )):null}
+        )):<DefaultPost />}
     </div>  
     )
   }
 }
+export default withRouter(ShowPost);

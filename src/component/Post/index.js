@@ -111,9 +111,7 @@ export default class Post extends Component {
         }
     }
     goFanPage = async(usedId)=>{
-        console.log(usedId)
-        const {UserPost} = this.state
-        this.props.history.push('/post/fanPage',{usedId,UserPost})
+        this.props.history.push('/post/fanPage',{usedId})
     }
     componentWillUnmount = () =>{
         this.setState = () => false;

@@ -1,18 +1,47 @@
 import React, { Component } from 'react'
 import ShowPost from "../showPost"
 import "./fanPage.css"
+import userInfo from "../../util/memoryUser"
+import {getUserPost} from "../../API"
+
 export default class FanPage extends Component { 
   state = {
       trackStatus : true,
       singlePost:[],
       usedId: {}
   }
-  componentDidMount = () =>{
-    let {usedId,UserPost} = this.props.history.location.state
-    let singlePost=UserPost.filter(x=>{
-        return x.user._id === usedId._id
+  componentDidMount = async() =>{
+    let {usedId} = this.props.history.location.state
+    let res = await getUserPost({_id:usedId._id});
+    if(res.status === 200){
+      this.addFlag(res.data);
+      this.setState({singlePost:res.data,usedId})
+    }
+  }
+  addFlag = (data) =>{
+    let userID = userInfo.getUser().id;
+    data.forEach(x=>{
+        x.comments.forEach(info=>{
+            if(info.user._id === userID){
+                info.flag = 'Y';
+            }
+        })
     })
-    this.setState({singlePost,usedId})
+    return data;
+  }
+  callStatusChange = async(query) =>{
+    const {usedId} = this.state;
+    let obj ={};
+    obj["_id"] = usedId._id
+    if(query && query !== undefined){obj[`${Object.keys(query)[0]}`] = Object.values(query)[0]}
+    let res = await getUserPost(obj);
+    if(res.status === 200){
+      this.addFlag(res.data);
+      this.setState({singlePost:res.data})
+    }
+  }
+  callChangeUser = () =>{
+
   }
   switchStatus = () =>{
       const {trackStatus}=this.state;
@@ -47,7 +76,10 @@ export default class FanPage extends Component {
                         </button>
                     }
             </div>
-            <ShowPost UserPost={this.state.singlePost} />
+            <ShowPost 
+              UserPost={this.state.singlePost} 
+              callStatusChange = {this.callStatusChange}
+            />
         </div>
     )
   }
