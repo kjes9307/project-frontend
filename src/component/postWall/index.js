@@ -73,7 +73,7 @@ export default class PostWall extends Component {
             <Route path="/post/Track" component={Track} />
             <Route path="/post/edit" component={EditProfile} />
             <Route path="/post/likeList" component={LikeList} />
-            <Route path="/post/fanPage" component={FanPage} />
+            <Route path="/post/fanPage/:id" component={FanPage} />
             <Redirect to="/post/wall" />
           </Switch>
           

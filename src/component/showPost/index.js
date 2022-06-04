@@ -66,7 +66,8 @@ class ShowPost extends Component {
         }
     }
     goFanPage = async(userInfo)=>{
-        this.props.history.replace('/post/fanPage',{userInfo})
+        this.props.history.replace(`/post/fanPage/${userInfo._id}`,{userInfo})
+        await this.props.callChangeUser(userInfo);
     }
     componentWillUnmount = () =>{
         this.setState = () => false;
@@ -152,8 +153,8 @@ class ShowPost extends Component {
             { x.comments.length !==0? x.comments.map(post=>(
                 <div className="user-post" key={post._id}>
                     <div className="user-img">
-                        {post.user.photo ?<img src={post.user.photo} alt="user_img" style={{width:40,height:40,borderRadius: 50,position:"absolute",left: 0,top: 0 ,border: "1px solid #000400"}} /> :
-                        <UserOutlined style={{fontSize: '28px',position:"absolute",left:"5px",top:"3px"}}/>}
+                        {post.user.photo ?<img onClick={()=>this.goFanPage(post.user)} src={post.user.photo} alt="user_img" style={{width:40,height:40,borderRadius: 50,position:"absolute",left: 0,top: 0 ,border: "1px solid #000400"}} /> :
+                        <UserOutlined onClick={()=>this.goFanPage(post.user)} style={{fontSize: '28px',position:"absolute",left:"5px",top:"3px"}}/>}
                         <div className="commentInfo">
                             <h5 style={{fontSize:"16px",fontFamily:"Noto Sans TC",whiteSpace: "nowrap",letterSpacing: "0px",color: "#000400"}}>{post.user.name}</h5>
                             <span style={{fontSize:"12px",fontFamily:"Baloo Da 2",whiteSpace: "nowrap",color: "#9B9893"}}>{moment(post.createTime).format('YYYY-MM-DD HH:mm:ss')} &nbsp;<span className='delBtn' onClick={()=>this.deleteComment(post._id)}>{post.flag?"刪除貼文":null}</span></span>

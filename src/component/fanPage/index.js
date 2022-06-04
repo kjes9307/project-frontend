@@ -40,8 +40,14 @@ export default class FanPage extends Component {
       this.setState({singlePost:res.data})
     }
   }
-  callChangeUser = () =>{
-
+  callChangeUser = async(userInfo) =>{
+    let obj ={};
+    obj["_id"] = userInfo._id;
+    let res = await getUserPost(obj);
+    if(res.status === 200){
+      this.addFlag(res.data);
+      this.setState({singlePost:res.data,usedId: userInfo})
+    }
   }
   switchStatus = () =>{
       const {trackStatus}=this.state;
@@ -79,6 +85,7 @@ export default class FanPage extends Component {
             <ShowPost 
               UserPost={this.state.singlePost} 
               callStatusChange = {this.callStatusChange}
+              callChangeUser = {this.callChangeUser}
             />
         </div>
     )
