@@ -44,6 +44,8 @@ export default class FanPage extends Component {
     let obj ={};
     obj["_id"] = userInfo._id;
     let res = await getUserPost(obj);
+    console.log("callback @ fanpage")
+
     if(res.status === 200){
       this.addFlag(res.data);
       this.setState({singlePost:res.data,usedId: userInfo})

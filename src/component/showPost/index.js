@@ -65,9 +65,9 @@ class ShowPost extends Component {
             await this.props.callStatusChange();
         }
     }
-    goFanPage = async(userInfo)=>{
-        this.props.history.replace(`/post/fanPage/${userInfo._id}`,{userInfo})
-        await this.props.callChangeUser(userInfo);
+    goFanPage = async(usedId)=>{
+        this.props.history.replace(`/post/fanPage/${usedId._id}`,{usedId})
+        await this.props.callChangeUser(usedId);
     }
     componentWillUnmount = () =>{
         this.setState = () => false;
@@ -86,7 +86,6 @@ class ShowPost extends Component {
                 placeholder="搜尋貼文" 
                 type="search"
                 ref={(e) => this.searchInput = e} 
-                onKeyUp={this.onSearchPost}
                 style={{ padding:"12px 16px",width: "319px",fontSize: "16px",border: "2px solid #000400",height:"46px",opacity: "1",background: "#FFF"}} />
             <div  style={{cursor:"pointer",border: "2px solid #000400",height:"46px",width:"46px",marginLeft:"-12px",position:"relative",background: "#03438D"}}>
                 <SearchOutlined onClick={this.ClickSearch} style={{fontSize: "20px", opacity: "1",position:"absolute",left:"12px",top:"13px",color:"#fff"}} />
