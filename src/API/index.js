@@ -31,6 +31,18 @@ const getLikeList = data => apiService('/user/getLikeList',data ,requestType.get
 
 const getUserPost = data => apiService('/user/getUserPost',data ,requestType.get);
 
+const getTrackList = data => apiService('/user/getTrackList',data ,requestType.get);
+
+const addTrack = data => apiService('/user/addTrack',data ,requestType.post);
+
+const unTrack = data => apiService('/user/cancelTrack',data ,requestType.post);
+
+const addFollow = data => apiService('/user/Follow',data, requestType.post);
+
+const unFollow = data => apiService('/user/unFollow',data, requestType.post);
+
+const getFollow = data => apiService('/user/getFollow',data ,requestType.get);
+
 export {
     getPost,
     addPost,
@@ -46,5 +58,11 @@ export {
     delComment,
     getLikeList,
     getSinglePost,
-    getUserPost
+    getUserPost,
+    getTrackList,
+    addTrack,
+    unTrack,
+    addFollow,
+    unFollow,
+    getFollow
 }
