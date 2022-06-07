@@ -3,6 +3,8 @@ import Logo from "../../static/img.svg";
 import Wall from "../../static/MetaWall.svg";
 import "./Login.css"
 import LoginForm from "../formControl/form.js"
+import { Spin } from 'antd';
+import store from "../../redux/store"
 export default class Login extends Component {
   state ={
       loginState : true
@@ -16,7 +18,8 @@ export default class Login extends Component {
     const {loginState} = this.state
     return (
         <div className='container'>
-        <div className='login-container'>
+          <Spin tip="Loading..." spinning={store.getState()}>
+          <div className='login-container'>
             <img className="login-Logo" src={Logo} alt="Logo" />
             <div className="login-item">
               <div className="login-bar">
@@ -25,7 +28,8 @@ export default class Login extends Component {
               </div>
               <LoginForm {...this.props} action={loginState} modeSwitch={this.modeSwitch} />
             </div>
-        </div>
+          </div>
+          </Spin>
         </div> 
     )
   }

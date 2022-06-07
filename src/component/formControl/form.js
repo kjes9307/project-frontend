@@ -4,6 +4,7 @@ import {userRegistry,userLogin} from '../../API'
 import userStatuRecorder from "../../util/memoryParams";
 import memoryService from "../../util/memoryUtil";
 import userInfo from "../../util/memoryUser"
+import store from "../../redux/store";
 
 const LoginForm = (params) => {
   const [form] = Form.useForm();
@@ -12,12 +13,14 @@ const LoginForm = (params) => {
       let callType = Object.keys(values).length
       // console.log(values)
       let resposne
+      store.dispatch({type:"load"})
       if(callType > 2){
         resposne = await userRegistry(values)
         if(resposne.status === 201){
           message.success("Registry Success",2)
           form.resetFields();
           params.modeSwitch();
+          store.dispatch({type:"unload"})
         }
       }
       else{ 
@@ -31,9 +34,9 @@ const LoginForm = (params) => {
           userInfo.saveUser(obj);
           userStatuRecorder[0]= resposne.data.token;
           memoryService.saveUser(resposne.data.token);
-          message.success("Login Success",2)
           form.resetFields();
-          params.history.replace('/post')
+          params.history.replace('/post');
+          store.dispatch({type:"unload"})
         }
       }
   };
