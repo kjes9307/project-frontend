@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import userStatuRecorder from "./util/memoryParams";
 import memoryService from "./util/memoryUtil";
+import store from "./redux/store";
 
 const user = memoryService.getUser();
 userStatuRecorder.length = 0
@@ -18,4 +19,15 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+store.subscribe(()=>{
+  ReactDOM.render(
+    <React.StrictMode>
+      <BrowserRouter>
+      <App />
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+})
 
