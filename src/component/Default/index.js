@@ -10,7 +10,7 @@ export default class DefaultPost extends Component {
             <div className="offset2"></div>
         </div>
         <div className="default-contain">
-          目前尚無動態.. 新增一則貼文吧
+          {this.props.data}
         </div>
       </div>
     )

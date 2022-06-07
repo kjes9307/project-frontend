@@ -167,7 +167,7 @@ class ShowPost extends Component {
                 </div>
             )): null}
         </div>
-        )):<DefaultPost />}
+        )):<DefaultPost data={"目前尚無任何貼文...發表一篇吧"} />}
     </div>  
     )
   }
